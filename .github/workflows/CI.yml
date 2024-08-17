@@ -35,30 +35,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: Linux-x64
-            os: ubuntu-20.04
-            cmake-flags: '-G "Unix Makefiles" -D RULE_LAUNCH_COMPILE=ccache'
-            cache-path: '~/.ccache'
-            
           - name: macOS
-            os: macos-11
+            os: macos-latest
             cmake-flags: '-G Xcode -D CMAKE_OSX_ARCHITECTURES="x86_64;arm64"'
-            xcode-version: '12.4'
             deployment-target: '10.10'
-            
-          - name: Windows-32bit
-            os: windows-2019
-            cmake-flags: '-G "Visual Studio 16 2019" -A Win32'
-            vcvars-script: 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars32.bat'
-            fftw-url: 'ftp://ftp.fftw.org/pub/fftw/fftw-3.3.5-dll32.zip'
-            fftw-arch: 'X86'
-            
-          - name: Windows-64bit
-            os: windows-2019
-            cmake-flags: '-G "Visual Studio 16 2019" -A x64'
-            vcvars-script: 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat'
-            fftw-url: 'ftp://ftp.fftw.org/pub/fftw/fftw-3.3.5-dll64.zip'
-            fftw-arch: 'X64'
 
     env:
       SC_SRC_PATH: ${{ github.workspace }}/supercollider
