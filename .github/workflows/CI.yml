@@ -113,11 +113,10 @@ jobs:
       run: | 
         if [[ "${{ runner.os }}" == "Windows" ]]; then
           7z a ${{ steps.set-filename.outputs.filename }}.zip -tzip .
+        elif [[ "${{ runner.os }}" == "macOS" ]]; then
+          tar jcvf ${{ steps.set-filename.outputs.filename }}.tar.bz2 --exclude ._\* .
         else
           zip -r ${{ steps.set-filename.outputs.filename }}.zip .
-        fi
-        if [[ "${{ runner.os }}" == "macOS" ]]; then
-          zip -d ${{ steps.set-filename.outputs.filename }}.zip \*/._\*
         fi
     - name: upload artifacts
       uses: actions/upload-artifact@v2
